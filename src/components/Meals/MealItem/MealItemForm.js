@@ -1,10 +1,18 @@
-import Input from "../../UI/Input";
-import classes from "./MealItemForm.module.css";
+import { useState } from 'react';
+import Input from '../../UI/Input';
+import classes from './MealItemForm.module.css';
 
 const MealItemForm = (props) => {
+  const [amount, setAmount] = useState(1);
+
+  const amountChangeHandler = (event) => {
+    setAmount(Number(event.target.value));
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
-    // abhi koi logic nahi
+
+    props.onAddToCart(amount);
   };
 
   return (
@@ -12,12 +20,13 @@ const MealItemForm = (props) => {
       <Input
         label="Amount"
         input={{
-          id: "amount_" + props.id,
-          type: "number",
-          min: "1",
-          max: "5",
-          step: "1",
-          defaultValue: "1",
+          id: 'amount_' + props.id,
+          type: 'number',
+          min: '1',
+          max: '5',
+          step: '1',
+          value: amount,
+          onChange: amountChangeHandler,
         }}
       />
 

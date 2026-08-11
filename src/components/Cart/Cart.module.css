@@ -10,16 +10,18 @@
 
 .modal {
   position: fixed;
-  top: 20vh;
+  top: 10vh;
   left: 50%;
   transform: translateX(-50%);
-  width: 35rem;
+  width: 40rem;
   max-width: 90%;
+  max-height: 80vh;   /* modal ki maximum height */
+  overflow-y: auto;   /* andar scroll enable */
   background: white;
   padding: 1rem;
   border-radius: 14px;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
   z-index: 100;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 .cart-items {
@@ -29,6 +31,9 @@
 }
 
 .cart-items li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid #8a2b06;
   padding: 1rem 0;
 }
@@ -64,10 +69,11 @@
 
 .button,
 .button--alt {
+  font: inherit;
+  cursor: pointer;
   padding: 0.5rem 1.5rem;
   border-radius: 25px;
   margin-left: 1rem;
-  cursor: pointer;
 }
 
 .button {
@@ -80,4 +86,36 @@
   background: transparent;
   color: #8a2b06;
   border: 1px solid #8a2b06;
+}
+
+.button:hover,
+.button:active {
+  background: #641e03;
+}
+
+.button--alt:hover,
+.button--alt:active {
+  background: #ffe6dc;
+}
+
+.actionsItem {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.actionsItem button {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #8a2b06;
+  background: white;
+  color: #8a2b06;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.actionsItem button:hover {
+  background: #8a2b06;
+  color: white;
 }

@@ -1,57 +1,91 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import classes from "./Cart.module.css";
-
-const Backdrop = (props) => {
-  return <div className={classes.backdrop} onClick={props.onClose}></div>;
-};
-
-const ModalOverlay = (props) => {
-  return (
-    <div className={classes.modal}>
-      <ul className={classes["cart-items"]}>
-        <li>
-          <div>
-            <h3>Paneer Butter Masala</h3>
-            <div className={classes.summary}>
-              <span className={classes.price}>₹229</span>
-              <span className={classes.amount}>x 2</span>
-            </div>
-          </div>
-        </li>
-      </ul>
-
-      <div className={classes.total}>
-        <span>Total Amount</span>
-        <span>₹458</span>
-      </div>
-
-      <div className={classes.actions}>
-        <button className={classes["button--alt"]} onClick={props.onClose}>
-          Close
-        </button>
-
-        <button className={classes.button}>Order</button>
-      </div>
-    </div>
-  );
-};
-
-const portalElement = document.getElementById("modal-root");
+import { useContext } from 'react';
+import ReactDOM from 'react-dom';
+import CartContext from '../../Store/CartContext';
+import classes from './Cart.module.css';
 
 const Cart = (props) => {
-  return (
-    <>
-      {ReactDOM.createPortal(
-        <Backdrop onClose={props.onClose} />,
-        portalElement
-      )}
+  const cartCtx = useContext(CartContext);
 
-      {ReactDOM.createPortal(
-        <ModalOverlay onClose={props.onClose} />,
-        portalElement
-      )}
-    </>
+  const cartItemRemoveHandler = (id) => {
+    cartCtx.removeItem(id);
+  };
+
+  const cartItemAddHandler = (item) => {
+    cartCtx.addItem({ ...item, amount: 1 });
+  };
+
+  return ReactDOM.createPortal(
+    <>
+      <div
+        className={classes.backdrop}
+        onClick={props.onClose}
+      ></div>
+
+      <div className={classes.modal}>
+        <ul className={classes['cart-items']}>
+          {cartCtx.items.map((item) => (
+            <li key={item.id}>
+              <div>
+                <h3>{item.name}</h3>
+
+                <div className={classes.summary}>
+                  <span className={classes.price}>
+                    ₹{item.price}
+                  </span>
+
+                  <span className={classes.amount}>
+                    x {item.amount}
+                  </span>
+                </div>
+              </div>
+
+              <div className={classes.actionsItem}>
+                <button
+                  onClick={cartItemRemoveHandler.bind(
+                    null,
+                    item.id
+                  )}
+                >
+                  −
+                </button>
+
+                <button
+                  onClick={cartItemAddHandler.bind(
+                    null,
+                    item
+                  )}
+                >
+                  +
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <div className={classes.total}>
+          <span>Total Amount</span>
+
+          <span>
+            ₹{cartCtx.totalAmount.toFixed(0)}
+          </span>
+        </div>
+
+        <div className={classes.actions}>
+          <button
+            className={classes['button--alt']}
+            onClick={props.onClose}
+          >
+            Close
+          </button>
+
+          <button className={classes.button}>
+            Order
+          </button>
+        </div>
+      </div>
+    </>,
+
+    document.getElementById('modal-root')
   );
 };
 
