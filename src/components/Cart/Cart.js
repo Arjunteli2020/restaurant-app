@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import classes from "./Cart.module.css";
 
-const Backdrop = () => {
-  return <div className={classes.backdrop}></div>;
+const Backdrop = (props) => {
+  return <div className={classes.backdrop} onClick={props.onClose}></div>;
 };
 
-const ModalOverlay = () => {
+const ModalOverlay = (props) => {
   return (
     <div className={classes.modal}>
       <ul className={classes["cart-items"]}>
@@ -19,25 +19,18 @@ const ModalOverlay = () => {
             </div>
           </div>
         </li>
-
-        <li>
-          <div>
-            <h3>Veg Biryani</h3>
-            <div className={classes.summary}>
-              <span className={classes.price}>₹199</span>
-              <span className={classes.amount}>x 1</span>
-            </div>
-          </div>
-        </li>
       </ul>
 
       <div className={classes.total}>
         <span>Total Amount</span>
-        <span>₹657</span>
+        <span>₹458</span>
       </div>
 
       <div className={classes.actions}>
-        <button className={classes["button--alt"]}>Close</button>
+        <button className={classes["button--alt"]} onClick={props.onClose}>
+          Close
+        </button>
+
         <button className={classes.button}>Order</button>
       </div>
     </div>
@@ -46,11 +39,18 @@ const ModalOverlay = () => {
 
 const portalElement = document.getElementById("modal-root");
 
-const Cart = () => {
+const Cart = (props) => {
   return (
     <>
-      {ReactDOM.createPortal(<Backdrop />, portalElement)}
-      {ReactDOM.createPortal(<ModalOverlay />, portalElement)}
+      {ReactDOM.createPortal(
+        <Backdrop onClose={props.onClose} />,
+        portalElement
+      )}
+
+      {ReactDOM.createPortal(
+        <ModalOverlay onClose={props.onClose} />,
+        portalElement
+      )}
     </>
   );
 };
