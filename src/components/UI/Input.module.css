@@ -1,0 +1,16 @@
+.input {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.input label {
+  font-weight: bold;
+}
+
+.input input {
+  width: 3rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding: 0.25rem;
+}
