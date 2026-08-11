@@ -1,0 +1,83 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 10;
+}
+
+.modal {
+  position: fixed;
+  top: 20vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 35rem;
+  max-width: 90%;
+  background: white;
+  padding: 1rem;
+  border-radius: 14px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+}
+
+.cart-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cart-items li {
+  border-bottom: 1px solid #8a2b06;
+  padding: 1rem 0;
+}
+
+.summary {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.price {
+  font-weight: bold;
+  color: #8a2b06;
+}
+
+.amount {
+  border: 1px solid #ccc;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.actions {
+  text-align: right;
+}
+
+.button,
+.button--alt {
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.button {
+  background: #8a2b06;
+  color: white;
+  border: 1px solid #8a2b06;
+}
+
+.button--alt {
+  background: transparent;
+  color: #8a2b06;
+  border: 1px solid #8a2b06;
+}
