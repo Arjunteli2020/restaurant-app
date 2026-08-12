@@ -88,5 +88,4 @@ const Cart = (props) => {
     document.getElementById('modal-root')
   );
 };
-
 export default Cart;
